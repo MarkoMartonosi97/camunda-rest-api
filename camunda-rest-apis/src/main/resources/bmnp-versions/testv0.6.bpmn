@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1y31hxu" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="2.2.3">
+  <bpmn:process id="test6" isExecutable="true">
+    <bpmn:extensionElements>
+      <camunda:executionListener class="com.marko.camundarestapis.handlers.ProcessStartHandler" event="start" />
+    </bpmn:extensionElements>
+    <bpmn:subProcess id="SubProcess_0di96nh">
+      <bpmn:incoming>SequenceFlow_0ov7gai</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0hrdqpo</bpmn:outgoing>
+      <bpmn:startEvent id="StartEvent_1fi8dnw" camunda:initiator="student">
+        <bpmn:outgoing>SequenceFlow_1gfuzx2</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:userTask id="UserTask_0d7ef9c" name="Clanovi komisije dodeljuju ocenu" camunda:assignee="${clan.id}">
+        <bpmn:extensionElements>
+          <camunda:formData>
+            <camunda:formField id="ocenaClanaKomisije" label="Ocena: " type="enum">
+              <camunda:value id="nijePolozio" name="Nije polozio" />
+              <camunda:value id="sest" name="6" />
+              <camunda:value id="sedam" name="7" />
+              <camunda:value id="osam" name="8" />
+              <camunda:value id="devet" name="9" />
+              <camunda:value id="deset" name="10" />
+            </camunda:formField>
+          </camunda:formData>
+          <camunda:taskListener class="com.marko.camundarestapis.handlers.ClanoviKomisijeDodeljujuOcenuHandler" event="complete" />
+        </bpmn:extensionElements>
+        <bpmn:incoming>SequenceFlow_1gfuzx2</bpmn:incoming>
+        <bpmn:outgoing>SequenceFlow_044893s</bpmn:outgoing>
+        <bpmn:multiInstanceLoopCharacteristics camunda:collection="${experimentalGroup}" camunda:elementVariable="clan" />
+      </bpmn:userTask>
+      <bpmn:sequenceFlow id="SequenceFlow_044893s" sourceRef="UserTask_0d7ef9c" targetRef="ExclusiveGateway_12yvkte" />
+      <bpmn:endEvent id="EndEvent_1okdx4g">
+        <bpmn:incoming>SequenceFlow_00h9oek</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:exclusiveGateway id="ExclusiveGateway_12yvkte">
+        <bpmn:incoming>SequenceFlow_044893s</bpmn:incoming>
+        <bpmn:outgoing>SequenceFlow_00h9oek</bpmn:outgoing>
+        <bpmn:outgoing>SequenceFlow_0s37c05</bpmn:outgoing>
+      </bpmn:exclusiveGateway>
+      <bpmn:sequenceFlow id="SequenceFlow_00h9oek" sourceRef="ExclusiveGateway_12yvkte" targetRef="EndEvent_1okdx4g">
+        <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${studentPolozioDiplomski==true}</bpmn:conditionExpression>
+      </bpmn:sequenceFlow>
+      <bpmn:endEvent id="EndEvent_18njw8x">
+        <bpmn:incoming>SequenceFlow_0s37c05</bpmn:incoming>
+        <bpmn:errorEventDefinition errorRef="Error_11ro30a" />
+      </bpmn:endEvent>
+      <bpmn:sequenceFlow id="SequenceFlow_0s37c05" sourceRef="ExclusiveGateway_12yvkte" targetRef="EndEvent_18njw8x">
+        <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${studentPolozioDiplomski!=true}</bpmn:conditionExpression>
+      </bpmn:sequenceFlow>
+      <bpmn:sequenceFlow id="SequenceFlow_1gfuzx2" sourceRef="StartEvent_1fi8dnw" targetRef="UserTask_0d7ef9c" />
+    </bpmn:subProcess>
+    <bpmn:startEvent id="StartEvent_0v1ycxa">
+      <bpmn:outgoing>SequenceFlow_0ov7gai</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0ov7gai" sourceRef="StartEvent_0v1ycxa" targetRef="SubProcess_0di96nh" />
+    <bpmn:boundaryEvent id="BoundaryEvent_03xnt54" attachedToRef="SubProcess_0di96nh">
+      <bpmn:outgoing>SequenceFlow_0kofuua</bpmn:outgoing>
+      <bpmn:timerEventDefinition>
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT20M</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
+    </bpmn:boundaryEvent>
+    <bpmn:sendTask id="SendTask_1ppase1" name="Notifikacija studenta" camunda:class="com.marko.camundarestapis.services.SendMailService">
+      <bpmn:extensionElements>
+        <camunda:field name="to">
+          <camunda:string>marko.martonosi97@gmail.com</camunda:string>
+        </camunda:field>
+        <camunda:field name="from">
+          <camunda:string>marko.martonosi@gmail.com</camunda:string>
+        </camunda:field>
+        <camunda:field name="messageTxt">
+          <camunda:string>${mailMes}</camunda:string>
+        </camunda:field>
+        <camunda:field name="subject">
+          <camunda:string>Ovo je mail</camunda:string>
+        </camunda:field>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_0hrdqpo</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_0bbi0rl</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_0kofuua</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1n75pss</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:sequenceFlow id="SequenceFlow_0hrdqpo" sourceRef="SubProcess_0di96nh" targetRef="SendTask_1ppase1">
+      <bpmn:extensionElements>
+        <camunda:executionListener class="com.marko.camundarestapis.handlers.CompletedSuccessfullyHandler" event="take" />
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:boundaryEvent id="BoundaryEvent_16a3m7r" attachedToRef="SubProcess_0di96nh">
+      <bpmn:outgoing>SequenceFlow_0bbi0rl</bpmn:outgoing>
+      <bpmn:errorEventDefinition errorRef="Error_11ro30a" />
+    </bpmn:boundaryEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0bbi0rl" sourceRef="BoundaryEvent_16a3m7r" targetRef="SendTask_1ppase1">
+      <bpmn:extensionElements>
+        <camunda:executionListener class="com.marko.camundarestapis.handlers.CompletedWithErrorHandler" event="take" />
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+    <bpmn:endEvent id="EndEvent_0llvu9d">
+      <bpmn:incoming>SequenceFlow_1n75pss</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_1n75pss" sourceRef="SendTask_1ppase1" targetRef="EndEvent_0llvu9d" />
+    <bpmn:sequenceFlow id="SequenceFlow_0kofuua" sourceRef="BoundaryEvent_03xnt54" targetRef="SendTask_1ppase1">
+      <bpmn:extensionElements>
+        <camunda:executionListener class="com.marko.camundarestapis.handlers.CompletedOutOfTimeHandler" event="take" />
+      </bpmn:extensionElements>
+    </bpmn:sequenceFlow>
+  </bpmn:process>
+  <bpmn:message id="Message_0ssyz6d" name="Message_20lg92l" />
+  <bpmn:message id="Message_0lfmmcl" name="Message_3a26grh" />
+  <bpmn:message id="Message_0jk1q60" name="Message_1lojfrm" />
+  <bpmn:error id="Error_0y4epid" name="obustavljanjeIzrade" errorCode="-1" />
+  <bpmn:error id="Error_0ze0pkw" name="obustavljanjeZakazivanja" errorCode="-1" />
+  <bpmn:error id="Error_1tm8g9u" name="clanKomisijeNeOdobravaTermin" errorCode="-1" />
+  <bpmn:error id="Error_0rwdwmp" name="clanKomisijeImePitanje" errorCode="-1" />
+  <bpmn:error id="Error_11ro30a" name="izradaSeOkoncavaBrobijenRok" errorCode="-1" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="test6">
+      <bpmndi:BPMNShape id="SubProcess_0di96nh_di" bpmnElement="SubProcess_0di96nh" isExpanded="true">
+        <dc:Bounds x="4047" y="326" width="890" height="497" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_1fi8dnw_di" bpmnElement="StartEvent_1fi8dnw">
+        <dc:Bounds x="4167" y="530" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_0d7ef9c_di" bpmnElement="UserTask_0d7ef9c">
+        <dc:Bounds x="4298" y="508" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_044893s_di" bpmnElement="SequenceFlow_044893s">
+        <di:waypoint x="4398" y="548" />
+        <di:waypoint x="4451" y="548" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="StartEvent_0v1ycxa_di" bpmnElement="StartEvent_0v1ycxa">
+        <dc:Bounds x="3439" y="533" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0ov7gai_di" bpmnElement="SequenceFlow_0ov7gai">
+        <di:waypoint x="3475" y="551" />
+        <di:waypoint x="3784" y="551" />
+        <di:waypoint x="3784" y="559" />
+        <di:waypoint x="4047" y="559" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="BoundaryEvent_1pv1d9r_di" bpmnElement="BoundaryEvent_03xnt54">
+        <dc:Bounds x="4919" y="541" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SendTask_1ppase1_di" bpmnElement="SendTask_1ppase1">
+        <dc:Bounds x="6027" y="574" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0hrdqpo_di" bpmnElement="SequenceFlow_0hrdqpo">
+        <di:waypoint x="4937" y="579" />
+        <di:waypoint x="5865" y="579" />
+        <di:waypoint x="5865" y="614" />
+        <di:waypoint x="6027" y="614" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="BoundaryEvent_0a4261k_di" bpmnElement="BoundaryEvent_16a3m7r">
+        <dc:Bounds x="4919" y="587" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0bbi0rl_di" bpmnElement="SequenceFlow_0bbi0rl">
+        <di:waypoint x="4955" y="605" />
+        <di:waypoint x="6077" y="605" />
+        <di:waypoint x="6027" y="605" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_0llvu9d_di" bpmnElement="EndEvent_0llvu9d">
+        <dc:Bounds x="6232" y="596" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1n75pss_di" bpmnElement="SequenceFlow_1n75pss">
+        <di:waypoint x="6127" y="614" />
+        <di:waypoint x="6232" y="614" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_1okdx4g_di" bpmnElement="EndEvent_1okdx4g">
+        <dc:Bounds x="4742" y="530" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0kofuua_di" bpmnElement="SequenceFlow_0kofuua">
+        <di:waypoint x="4955" y="559" />
+        <di:waypoint x="6077" y="559" />
+        <di:waypoint x="6077" y="574" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ExclusiveGateway_12yvkte_di" bpmnElement="ExclusiveGateway_12yvkte" isMarkerVisible="true">
+        <dc:Bounds x="4451" y="523" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_00h9oek_di" bpmnElement="SequenceFlow_00h9oek">
+        <di:waypoint x="4501" y="548" />
+        <di:waypoint x="4742" y="548" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_1fmn23y_di" bpmnElement="EndEvent_18njw8x">
+        <dc:Bounds x="4458" y="662" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0s37c05_di" bpmnElement="SequenceFlow_0s37c05">
+        <di:waypoint x="4476" y="573" />
+        <di:waypoint x="4476" y="662" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1gfuzx2_di" bpmnElement="SequenceFlow_1gfuzx2">
+        <di:waypoint x="4203" y="548" />
+        <di:waypoint x="4298" y="548" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

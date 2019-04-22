@@ -1,0 +1,238 @@
+<div class="card">
+        <div class="card-header" id="headingOne">
+          <h2 class="mb-0">
+            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+              Zahtev za diplomski
+            </button>
+          </h2>
+        </div>
+    
+        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+          <div class="card-body">
+              <form>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Ime i prezime studenta</label>
+                    <input type="text" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" data-rule-required="true" name="emailField">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Broj indeksa</label>
+                    <input type="text" class="form-control form-control-sm" id="exampleInputPassword1" placeholder="Password" data-rule-required="true" name="passwordField">
+                  </div>
+                  <div class="form-group">
+                          <label for="select1">Vrsta studija</label>
+                          <select id="select1" class="form-control form-control-sm">
+                              <option>Small select</option>
+                          </select>
+                  </div>
+                  <div class="form-group">
+                          <label for="select2">Studijski program</label>
+                          <select id="select2" class="form-control form-control-sm">
+                              <option>Small select</option>
+                          </select>
+                  </div>
+                  <div class="form-group">
+                          <label for="select3">Studijska grupa</label>
+                          <select id="select3" class="form-control form-control-sm">
+                              <option>Small select</option>
+                          </select>
+                  </div>
+                  <div class="form-group">
+                          <label for="oblast">Oblast iz kog student radi diplomski</label>
+                          <input type="text" class="form-control form-control-sm" id="oblast" placeholder="Naziv oblasti" data-rule-required="true" name="passwordField">
+                  </div>
+                  <div class="form-group">
+                          <label for="select4">Nastavnik diplomskog</label>
+                          <select id="select4" class="form-control form-control-sm">
+                              <option>Small select</option>
+                          </select>
+                  </div>    
+                  <!-- <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                  </div> 
+                  <div class="form-group">
+                      <select class="form-control form-control-sm">
+                          <option>Small select</option>
+                      </select>
+                  </div> -->
+                  <button type="submit" class="btn btn-primary">Complete</button>
+                </form>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" id="headingTwo">
+          <h2 class="mb-0">
+            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              Pregled zahteva za diplomski
+            </button>
+          </h2>
+        </div>
+
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+          <div class="card-body">
+                  <form>
+                      <div class="form-group">
+                          <label for="exampleInput1">Zahtev:</label>
+                          <input type="text" class="form-control form-control-sm" id="exampleInput1" aria-describedby="emailHelp" value="Akademske/sadf|sdf/SIT/E/asdf/mita" data-rule-required="true" name="emailField" readonly>
+                      </div>   
+                      <div class="form-group form-check">
+                          <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                          <label class="form-check-label" for="exampleCheck1">Student zadovoljava uslov polaganja diplomskog</label>
+                      </div> 
+                          <button type="submit" class="btn btn-primary">Complete</button>
+                        </form>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+              <div class="card-header" id="heading4">
+                <h2 class="mb-0">
+                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                    Naziv teme i clanovi komesije za diplomski
+                  </button>
+                </h2>
+              </div>
+              <div id="collapse4" class="collapse" aria-labelledby="heading4" data-parent="#accordionExample">
+                <div class="card-body">
+                      <form>
+                              <div class="form-group">
+                                <label for="input40">Zahtev:</label>
+                                <input type="text" class="form-control form-control-sm" id="input40" value="Akademske/sadf|sdf/SIT/E/asdf/mita" data-rule-required="true" name="input40" readonly>
+                              </div>
+                              <div class="form-group">
+                                <label for="input41">Naziv diplomskog</label>
+                                <input type="text" class="form-control form-control-sm" id="input41" placeholder="Naziv" data-rule-required="true" name="input41">
+                              </div>
+                              <div class="form-group">
+                                      <label for="select40">1. clan komisije</label>
+                                      <select id="select40" class="form-control form-control-sm">
+                                          <option>Small select</option>
+                                      </select>
+                              </div>
+                              <div class="form-group">
+                                      <label for="select41">2. clan komisije</label>
+                                      <select id="select42" class="form-control form-control-sm">
+                                          <option>Small select</option>
+                                      </select>
+                              </div>
+                              <div class="form-group">
+                                      <label for="input42">3. clan komisije (mentor):</label>
+                                      <input type="text" class="form-control form-control-sm" id="input42" value="Djura" data-rule-required="true" name="input42" readonly>
+                              </div>
+                              <div class="form-group">
+                                  <button id="add-new-member" type="button" class="btn btn-primary btn-sm">Dodaj novog clana komisije</button>
+                              </div>
+                              <button type="submit" class="btn btn-primary">Complete</button>
+                            </form>
+                </div>
+              </div>
+      </div>
+      <div class="card">
+              <div class="card-header" id="heading5">
+                <h2 class="mb-0">
+                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
+                    Pregled zahteva za diplomski
+                  </button>
+                </h2>
+              </div>
+
+              <div id="collapse5" class="collapse" aria-labelledby="heading5" data-parent="#accordionExample">
+                <div class="card-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="input51">Zahtev:</label>
+                                <input type="text" class="form-control form-control-sm" id="input51" aria-describedby="emailHelp" value="Akademske/sadf|sdf/SIT/E/asdf/mita" data-rule-required="true" name="input51" readonly>
+                            </div>   
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" id="input52">
+                                <label class="form-check-label" for="input52">Student zadovoljava uslov polaganja diplomskog</label>
+                            </div> 
+                                <button type="submit" class="btn btn-primary">Complete</button>
+                              </form>
+                </div>
+              </div>
+      </div>
+      <div class="card">
+                  <div class="card-header" id="heading6">
+                    <h2 class="mb-0">
+                      <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse6" aria-expanded="false" aria-controls="collapse6">
+                        Pregled zahteva za diplomski
+                      </button>
+                    </h2>
+                  </div>
+
+                  <div id="collapse6" class="collapse" aria-labelledby="heading6" data-parent="#accordionExample">
+                    <div class="card-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="input61">Zahtev:</label>
+                                    <input type="text" class="form-control form-control-sm" id="input51" aria-describedby="emailHelp" value="Akademske/sadf|sdf/SIT/E/asdf/mita" data-rule-required="true" name="input61" readonly>
+                                </div>   
+                                    <button type="submit" class="btn btn-primary">Potvrdi</button>
+                                    <button type="submit" class="btn btn-danger">Odbaci</button>
+                                  </form>
+                    </div>
+                  </div>
+      </div>
+      <div class="card">
+                      <div class="card-header" id="heading7">
+                        <h2 class="mb-0">
+                          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse7" aria-expanded="false" aria-controls="collapse6">
+                            Predlog diplomskog
+                          </button>
+                        </h2>
+                      </div>
+    
+                      <div id="collapse7" class="collapse" aria-labelledby="heading7" data-parent="#accordionExample">
+                        <div class="card-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="input71">Diplomski:</label></br>
+                                        <input type="file" id="input71" required name="input71">
+                                    </div>   
+                                        <button type="submit" class="btn btn-primary">Potvrdi</button>
+                                      </form>
+                        </div>
+                      </div>
+      </div>
+      <div class="card">
+                          <div class="card-header" id="heading8">
+                            <h2 class="mb-0">
+                              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse8" aria-expanded="false" aria-controls="collapse8">
+                                Revizija diplomskog
+                              </button>
+                            </h2>
+                          </div>
+        
+                          <div id="collapse8" class="collapse" aria-labelledby="heading8" data-parent="#accordionExample">
+                            <div class="card-body">
+                                    <form>
+                                        <div class="form-group">
+                                           <button id="download-file" type="button" class="btn btn-light btn-sm">Preuzmi diplomski</button>
+                                        </div>
+                                        <div class="form-group form-check">
+                                              <div class="form-check">
+                                                      <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                                      <label class="form-check-label" for="exampleRadios1">
+                                                          Zadovoljava
+                                                      </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                      <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                                                      <label class="form-check-label" for="exampleRadios2">
+                                                          Potrebna dorada
+                                                      </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                      <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3">
+                                                      <label class="form-check-label" for="exampleRadios3">
+                                                        Izrada se okoncava
+                                                      </label>
+                                                    </div>
+                                          </div>    
+                                            <button type="submit" class="btn btn-primary">Potvrdi</button>
+                                          </form>
+                            </div>
+                          </div>
+      </div>
